@@ -1,23 +1,27 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Main {
 
 	private JFrame frame;
-	private JLabel label1, label2, label3;
+	private JLabel label1, label2, label3, image1, image2, image3;
 	private JTextField field1, field2;
 	private JRadioButton radioBtn1, radioBtn2, radioBtn3;
 	private JCheckBox checkBx1, checkBx2;
 	private JButton btn;
-
-	public static void main(String[] args) {
+	
+	public static void main(String[] args) throws IOException {
 		Main obj = new Main();
 		obj.form1();
 
 	}
 
-	public void form1() {
+	public void form1() throws IOException {
 
 		//create the frame
 		frame = new JFrame("Bicycle Exercise");
@@ -42,12 +46,24 @@ public class Main {
 
 		//create panel 2
 		JPanel p2 = new JPanel();
+		BufferedImage img1 = ImageIO.read(new File("src\\images\\bicycle1.png"));
+		image1 = new JLabel(new ImageIcon(img1));
+		BufferedImage img2 = ImageIO.read(new File("src\\images\\bicycle2.png"));
+		image2 = new JLabel(new ImageIcon(img2));
+		BufferedImage img3 = ImageIO.read(new File("src\\images\\bicycle3.png"));
+		image3 = new JLabel(new ImageIcon(img3));
+		image1.setVisible(false);
+		image2.setVisible(false);
+		image3.setVisible(false);
 		radioBtn1 = new JRadioButton();
 		radioBtn1.setText("Model 1");
 		radioBtn2 = new JRadioButton();
 		radioBtn2.setText("Model 2");
 		radioBtn3 = new JRadioButton();
 		radioBtn3.setText("Model 3");
+		p2.add(image1);
+		p2.add(image2);
+		p2.add(image3);
 		p2.add(radioBtn1);
 		p2.add(radioBtn2);
 		p2.add(radioBtn3);
