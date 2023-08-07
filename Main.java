@@ -107,8 +107,8 @@ public class Main implements ActionListener {
 		
 
 		
-		//frame.setSize(700,700);
-		frame.pack();
+		frame.setSize(600,500);
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
 
