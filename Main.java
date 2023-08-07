@@ -16,7 +16,7 @@ public class Main implements ActionListener {
 	private JRadioButton radioBtn1, radioBtn2, radioBtn3;
 	private JCheckBox checkBx1, checkBx2;
 	private JButton btn;
-	 
+
 	public static void main(String[] args) throws IOException {
 		Main obj = new Main();
 		obj.form1();
@@ -30,7 +30,7 @@ public class Main implements ActionListener {
 		frame.setLayout(new GridLayout(6,0));
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 
 		//create panel 1
 		JPanel p1 = new JPanel();
@@ -48,7 +48,7 @@ public class Main implements ActionListener {
 
 		//create panel 2
 		JPanel p2 = new JPanel();
-		
+
 		BufferedImage img1 = ImageIO.read(new File("src\\images\\bicycle1.png"));
 		image1 = new JLabel(new ImageIcon(img1));
 		BufferedImage img2 = ImageIO.read(new File("src\\images\\bicycle2.png"));
@@ -58,7 +58,7 @@ public class Main implements ActionListener {
 		image1.setVisible(false);
 		image2.setVisible(false);
 		image3.setVisible(false);
-		
+
 		radioBtn1 = new JRadioButton();
 		radioBtn1.setText("Model 1");
 		radioBtn1.addActionListener(this);
@@ -66,14 +66,14 @@ public class Main implements ActionListener {
 		radioBtn2.setText("Model 2");
 		radioBtn3 = new JRadioButton();
 		radioBtn3.setText("Model 3");
-		ButtonGroup group = new ButtonGroup();
-		group.add(radioBtn1);
-		group.add(radioBtn2);
-		group.add(radioBtn3);
+		ButtonGroup g1 = new ButtonGroup();
+		g1.add(radioBtn1);
+		g1.add(radioBtn2);
+		g1.add(radioBtn3);
 		radioBtn1.addActionListener(this);
 		radioBtn2.addActionListener(this);
 		radioBtn3.addActionListener(this);
-		
+
 		p2.add(image1);
 		p2.add(image2);
 		p2.add(image3);
@@ -81,33 +81,39 @@ public class Main implements ActionListener {
 		p2.add(radioBtn2);
 		p2.add(radioBtn3);
 		frame.add(p2);
-		
+
 		//create panel 3
-		
+
 		JPanel p3 = new JPanel();
 		checkBx1 = new JCheckBox();
 		checkBx1.setText("Senior Citizen");
 		checkBx2 = new JCheckBox();
 		checkBx2.setText("Member");
+		ButtonGroup g2 = new ButtonGroup();
+		g2.add(checkBx1);
+		g2.add(checkBx2);
+		checkBx1.addActionListener(this);
+		checkBx2.addActionListener(this);
 		p3.add(checkBx1);
 		p3.add(checkBx2);
 		frame.add(p3);
-		
+
 		//create panel 4
 		JPanel p4 = new JPanel();
-		label3 = new JLabel("Total");
-		field3 = new JTextField();
-		field3.setVisible(false);
+		//label3 = new JLabel("Total");
+		//field3 = new JTextField(20);
+		//field3.setVisible(false);
 		btn = new JButton("Compute");
-		p4.add(label3);
-		p4.add(field3);
+		btn.addActionListener(this);
+		//p4.add(label3);
+		//p4.add(field3);
 		p4.add(btn);
 		frame.add(p4);
-		
-		
 
-		
-		frame.setSize(600,500);
+
+
+
+		frame.setSize(500,500);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
@@ -115,15 +121,15 @@ public class Main implements ActionListener {
 
 	}
 
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if(radioBtn1.isSelected()) {
 			image1.setVisible(true);
 			image2.setVisible(false);
 			image3.setVisible(false);
-			
+
 		}
 		else if(radioBtn2.isSelected()) {
 			image2.setVisible(true);
@@ -135,7 +141,98 @@ public class Main implements ActionListener {
 			image2.setVisible(false);
 			image1.setVisible(false);
 		}
-	
+
+		if(e.getSource().equals(btn)) {
+			double total = 0.0;
+			int model1 = 14;
+			int model2 = 12;
+			int model3 = 10;
+			double seniorDiscount = 0.1;
+			double memberDiscount = 0.12;
+			String name = field1.getText();
+			Integer days = Integer.parseInt(field2.getText());
+
+			/*
+			 * while(days < 6) { JOptionPane.showMessageDialog(btn, "Enter 6 or more days");
+			 * break; }
+			 */
+
+			if(days < 6) {
+				total = 8.99;
+			}	
+
+			else if(days >=6 && days <= 10) {
+				double discount = 0.08;
+				if(radioBtn1.isSelected() && checkBx1.isSelected()) {
+
+					double result = (model1 * discount) - model1;
+					total = (result * seniorDiscount) - result;
+				}
+				else if(radioBtn2.isSelected() && checkBx1.isSelected()) {
+					
+					double result = (model2 * discount) - model2;
+					total = (result * seniorDiscount) - result;
+				}
+				else if(radioBtn3.isSelected() && checkBx1.isSelected()) {
+					
+					double result = (model3 * discount) - model3;
+					total = (result * seniorDiscount) - result;
+				}
+				else if(radioBtn1.isSelected() && checkBx2.isSelected()) {
+					
+					double result = (model1 * discount) - model1;
+					total = (result * memberDiscount) - result;
+				}
+				else if(radioBtn2.isSelected() && checkBx2.isSelected()) {
+					
+					double result = (model2 * discount) - model2;
+					total = (result * memberDiscount) - result;
+				}
+				else if(radioBtn3.isSelected() && checkBx2.isSelected()) {
+					
+					double result = (model3 * discount) - model3;
+					total = (result * memberDiscount) - result;
+				}
+			}
+			else if(days > 10) {
+
+				double discount = 0.1;
+				if(radioBtn1.isSelected() && checkBx1.isSelected()) {
+
+					double result = (model1 * discount) - model1;
+					total = (result * seniorDiscount) - result;
+				}
+				else if(radioBtn2.isSelected() && checkBx1.isSelected()) {
+					
+					double result = (model2 * discount) - model2;
+					total = (result * seniorDiscount) - result;
+				}
+				else if(radioBtn3.isSelected() && checkBx1.isSelected()) {
+					
+					double result = (model3 * discount) - model3;
+					total = (result * seniorDiscount) - result;
+				}
+				else if(radioBtn1.isSelected() && checkBx2.isSelected()) {
+					
+					double result = (model1 * discount) - model1;
+					total = (result * memberDiscount) - result;
+				}
+				else if(radioBtn2.isSelected() && checkBx2.isSelected()) {
+					
+					double result = (model2 * discount) - model2;
+					total = (result * memberDiscount) - result;
+				}
+				else if(radioBtn3.isSelected() && checkBx2.isSelected()) {
+					
+					double result = (model3 * discount) - model3;
+					total = (result * memberDiscount) - result;
+				}
+
+			}
+
+			JOptionPane.showMessageDialog(btn, "Hello " + name + "\nyou choose " + days + " days"  + "\nso you'll be charge " + total + " dollars");
+		}
+
 	}
 
 }
