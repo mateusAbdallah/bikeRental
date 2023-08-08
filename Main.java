@@ -11,8 +11,8 @@ import javax.swing.*;
 public class Main implements ActionListener {
 
 	private JFrame frame;
-	private JLabel label1, label2, label3, image1, image2, image3;
-	private JTextField field1, field2, field3;
+	private JLabel label1, label2, image1, image2, image3;
+	private JTextField field1, field2;
 	private JRadioButton radioBtn1, radioBtn2, radioBtn3;
 	private JCheckBox checkBx1, checkBx2;
 	private JButton btn;
@@ -28,7 +28,6 @@ public class Main implements ActionListener {
 		//create the frame
 		frame = new JFrame("Bicycle Exercise");
 		frame.setLayout(new GridLayout(6,0));
-		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
@@ -94,24 +93,18 @@ public class Main implements ActionListener {
 		g2.add(checkBx2);
 		checkBx1.addActionListener(this);
 		checkBx2.addActionListener(this);
+		
 		p3.add(checkBx1);
 		p3.add(checkBx2);
 		frame.add(p3);
 
 		//create panel 4
 		JPanel p4 = new JPanel();
-		//label3 = new JLabel("Total");
-		//field3 = new JTextField(20);
-		//field3.setVisible(false);
 		btn = new JButton("Compute");
 		btn.addActionListener(this);
-		//p4.add(label3);
-		//p4.add(field3);
 		p4.add(btn);
 		frame.add(p4);
-
-
-
+		
 
 		frame.setSize(500,500);
 		frame.setLocationRelativeTo(null);
@@ -152,10 +145,6 @@ public class Main implements ActionListener {
 			String name = field1.getText();
 			Integer days = Integer.parseInt(field2.getText());
 
-			/*
-			 * while(days < 6) { JOptionPane.showMessageDialog(btn, "Enter 6 or more days");
-			 * break; }
-			 */
 
 			if(days < 6) {
 				total = 8.99;
@@ -230,7 +219,8 @@ public class Main implements ActionListener {
 
 			}
 
-			JOptionPane.showMessageDialog(btn, "Hello " + name + "\nyou choose " + days + " days"  + "\nso you'll be charge " + total + " dollars");
+			JOptionPane.showMessageDialog(btn, "Hello " + name + "\nThanks for chose our company" + 
+			"\nYou selected " + days + " days"  + "\nSo will be charge " + " $" + total + " dollars");
 		}
 
 	}
